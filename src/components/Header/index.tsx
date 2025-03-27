@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useState} from "react";
 import { Link } from "react-router-dom"
 
 //icons
 import { BsJustify, BsLock, BsPersonFill, BsX } from "react-icons/bs"
+import { FiLogOut } from "react-icons/fi";
 
 //components
 import Container from "../Container"
+//services
+import { useAuth  } from "../../context/useAuth";
 
 const Header = () => {
+
+    console.log("Header rendered");
+    const { user, logout } = useAuth();
 
     const [menuOpen, setMenuOpen] = useState(false);
     
@@ -18,9 +24,21 @@ const Header = () => {
                 <Container>
                     <nav>
                         <ul className="flex justify-end items-center gap-4 h-10">
-                            <li>Olá visitante!</li>
-                            <li className="flex items-center hover:text-white cursor-pointer"><BsLock /> <Link to='/register'>Cadastrar</Link></li>
-                            <li className="flex items-center hover:text-white cursor-pointer"><BsPersonFill /> <Link to="/login">Entrar</Link></li>
+
+                            {user ? (
+                                <>
+                                    <li>Bem-vindo {user.displayName}</li>
+                                    <li className="flex items-center hover:text-white cursor-pointer" onClick={logout}><FiLogOut /></li>
+                                </>
+                            ):(
+                                <>
+                                    <li>Olá visitante!</li>
+                                    <li className="flex items-center hover:text-white cursor-pointer"><BsLock /> <Link to='/register'>Cadastrar</Link></li>
+                                    <li className="flex items-center hover:text-white cursor-pointer"><BsPersonFill /> <Link to="/login">Entrar</Link></li>
+                                </>
+                            )}
+
+                            
                         </ul>
                     </nav>
                 </Container>
@@ -54,21 +72,28 @@ const Header = () => {
                         </ul>
                     </nav>
                 </div>
-
                 
                 {/*MENU MOBILE*/}
                 <div className={`fixed top-0 right-0 w-64 h-full bg-[#FF3C32] z-99  transform ${menuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out md:hidden`}>
                     <button className="absolute top-4 right-4 text-white" onClick={() => setMenuOpen(false)}>
                             <BsX size={30} />
-                    </button>
-                    
+                    </button>                   
                     
                     <div className="p-4">
                         <nav>
                             <ul className="flex flex-col gap-2">
-                                <li>Olá visitante!</li>
-                                <li className="flex items-center hover:text-white cursor-pointer"><BsLock /> Cadastrar</li>
-                                <li className="flex items-center hover:text-white cursor-pointer"><BsPersonFill /> Entrar</li>
+                                {user ? (
+                                    <>
+                                        <li>Bem-vindo {user.displayName}</li>
+                                        <li className="flex items-center hover:text-white cursor-pointer" onClick={logout}><FiLogOut /></li>
+                                    </>
+                                ):(
+                                    <>
+                                        <li>Olá visitante!</li>
+                                        <li className="flex items-center hover:text-white cursor-pointer"><BsLock /> <Link to='/register'>Cadastrar</Link></li>
+                                        <li className="flex items-center hover:text-white cursor-pointer"><BsPersonFill /> <Link to="/login">Entrar</Link></li>
+                                    </>
+                                )}
                             </ul>
                         </nav>
 

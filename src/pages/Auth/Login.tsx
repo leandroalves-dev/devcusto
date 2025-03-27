@@ -1,15 +1,17 @@
 import { FormEvent, useState } from "react";
 
-//services
-import { login } from "../../services/auth";
-
 //components
 import Container from "../../components/Container"
 import Loading from "../../components/Loading"
 import Input from "../../components/Input";
 import Buttons from "../../components/Buttons";
 
+// context
+import { useAuth } from "../../context/useAuth";
+
 const Login = () => {
+
+    const { login } = useAuth(); 
 
     const [formData, setFormData] = useState({
         email: '',
@@ -40,25 +42,21 @@ const Login = () => {
         setLoading(true);
 
         try {
-
-            const user = await login(formData.email, formData.password)
+            await login(formData.email, formData.password); // Usando a função de login do AuthContext
             setLoading(false);
-            setSuccess('Login efetuado com sucesso!')
-            setTimeout(() => { setSuccess('') },2000)
-            setError('')
-            setFormData({ email: '', password: '' })
-
-            console.log('Usuário logado:', user)
-            
+            setSuccess('Login efetuado com sucesso!');
+            setTimeout(() => { setSuccess('') }, 2000);
+            setError('');
+            setFormData({ email: '', password: '' });
         } catch (error) {
-            if(error instanceof Error){
+            if (error instanceof Error) {
                 setError(error.message);
                 throw new Error('Erro desconhecido. Tente novamente');
-            }else{
+            } else {
                 throw new Error('Erro desconhecido. Tente novamente');
             }
-        } finally{
-            setLoading(false)
+        } finally {
+            setLoading(false);
         }
     }
 

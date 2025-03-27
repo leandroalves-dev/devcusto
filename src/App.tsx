@@ -12,21 +12,26 @@ import Login from './pages/Auth/Login';
 
 //components
 import Header from './components/Header';
+
+//context
+import { AuthProvider } from './context/authContext';
  
 function App() {
     return (
         <div className='bg-neutral-950 h-screen'>
-            <BrowserRouter>
-                <Header />
-                <Routes>
-                    <Route path='/' element={<Home />} />
-                    <Route path='/projects' element={<Projects />} />
-                    <Route path='/company' element={<Company />} />
-                    <Route path='/contact' element={<Contact />} />
-                    <Route path='/register' element={<Register />} />
-                    <Route path='/login' element={<Login />} />
-                </Routes>
-            </BrowserRouter>
+            <AuthProvider>
+                <BrowserRouter>
+                    <Header />
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/projects' element={<Projects />} />
+                        <Route path='/company' element={<Company />} />
+                        <Route path='/contact' element={<Contact />} />
+                        <Route path='/register' element={<Register />} />
+                        <Route path='/login' element={<Login />} />
+                    </Routes>
+                </BrowserRouter>
+            </AuthProvider>
         </div>
     )
 }
