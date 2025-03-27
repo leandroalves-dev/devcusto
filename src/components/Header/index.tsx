@@ -7,8 +7,6 @@ import { BsJustify, BsLock, BsPersonFill, BsX } from "react-icons/bs"
 //components
 import Container from "../Container"
 
-
-
 const Header = () => {
 
     const [menuOpen, setMenuOpen] = useState(false);
@@ -21,23 +19,22 @@ const Header = () => {
                     <nav>
                         <ul className="flex justify-end items-center gap-4 h-10">
                             <li>Olá visitante!</li>
-                            <li className="flex items-center hover:text-white cursor-pointer"><BsLock /> Cadastrar</li>
-                            <li className="flex items-center hover:text-white cursor-pointer"><BsPersonFill /> Entrar</li>
+                            <li className="flex items-center hover:text-white cursor-pointer"><BsLock /> <Link to='/register'>Cadastrar</Link></li>
+                            <li className="flex items-center hover:text-white cursor-pointer"><BsPersonFill /> <Link to="/login">Entrar</Link></li>
                         </ul>
                     </nav>
                 </Container>
             </div>
 
             <Container className="md:flex justify-between items-center pt-6">
-                <div className="flex gap-4 items-center justify-center sm:justify-center">
-                    
+                
+                <Link to='/' className="flex gap-4 items-center justify-center sm:justify-centerlex">
                     <img src="./logo.png" alt="DevCusto" />
-                                        
                     <div className="flex flex-col leading-5">
                         <h1 className="text-2xl text-white">Dev<span className="text-[#FF3C32]">Custo</span></h1>
                         <h2 className="text-white text-sm sm:text-[12px] ">O melhor custo e desenvolvimento</h2>
                     </div>
-                </div>
+                </Link>
 
                 <div className='md:hidden absolute top-10 left-3'>
                     <button onClick={() => setMenuOpen(!menuOpen)}>

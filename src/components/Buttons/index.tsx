@@ -4,7 +4,7 @@ interface ButtonsProps{
 
 const Buttons = ({ title }: ButtonsProps) => {
     return (
-        <button className="bg-neutral-800 text-white p-2 rounded-[3px] my-3 cursor-pointer">{title}</button>
+        <button className="bg-[#FF3C32] px-5 text-white p-2 rounded-[3px] my-3 cursor-pointer hover:opacity-80">{title}</button>
     )
 }
 
