@@ -9,6 +9,7 @@ import Company from './pages/Company'
 import Contact from './pages/Contact'
 import Register from './pages/Auth/Register';
 import Login from './pages/Auth/Login';
+import ForgotPassword from './pages/Auth/ForgotPassword';
 
 //components
 import Header from './components/Header';
@@ -29,6 +30,7 @@ function App() {
                         <Route path='/contact' element={<Contact />} />
                         <Route path='/register' element={<Register />} />
                         <Route path='/login' element={<Login />} />
+                        <Route path='/reset' element={<ForgotPassword />} />
                     </Routes>
                 </BrowserRouter>
             </AuthProvider>

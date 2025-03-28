@@ -8,6 +8,7 @@ import Buttons from "../../components/Buttons";
 
 // context
 import { useAuth } from "../../context/useAuth";
+import { Link } from "react-router-dom";
 
 const Login = () => {
 
@@ -29,7 +30,6 @@ const Login = () => {
         }));
     };
     
-
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
 
@@ -70,7 +70,10 @@ const Login = () => {
                     <Input label="E-mail" type="email" name="email" value={formData.email} placeholder="Digite seu e-mail..." onChange={handleInputChange} />
                     <Input label="Senha" type="password" name="password" value={formData.password} placeholder="Digite sua senha..." onChange={handleInputChange} />
                     
-                    <Buttons title="Logar" />
+                    <div className="flex justify-between items-center">
+                        <Buttons title="Logar" />
+                        <Link to="/reset" className="text-white underline hover:no-underline">Esqueceu a senha?</Link>
+                    </div>
                 
                     {error && (<p className="bg-red-200 border border-red-300 text-center p-2 rounded-[3px] text-zinc-700">{error}</p>)}
                     {success && (<p className="bg-green-100 boder border-green-300 text-center p-2 rounded-[3px] text-zinc-700">{success}</p>)}

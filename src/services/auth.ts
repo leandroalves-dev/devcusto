@@ -59,3 +59,18 @@ export const login = async(email: string, password: string) => {
         }
     }
 }
+
+export const resetPassword = async (email: string) => {
+    try {
+        await sendPasswordResetEmail(auth, email);
+        return "Se este e-mail estiver cadastrado, você receberá um link para redefinir sua senha.";
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            console.error("Erro ao resetar senha:", error.message);
+            throw new Error("Erro ao resetar senha. Tente novamente.");
+        } else {
+            console.error("Erro desconhecido:", error);
+            throw new Error("Erro desconhecido. Tente novamente.");
+        }
+    }
+};

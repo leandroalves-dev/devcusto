@@ -1,0 +1,19 @@
+feat(auth): adiciona login com Google
+fix(ui): corrige bug no modal de cadastro
+chore(deps): atualiza dependências do projeto
+docs(readme): melhora a documentação inicial
+style(button): ajusta espaçamento do botão
+test(utils): adiciona testes para função de validação
+refactor(api): melhora performance da requisição de usuários
+
+
+Tipos mais comuns
+Tipo	Descrição
+feat	Nova funcionalidade
+fix	Correção de bug
+chore	Alterações que não afetam código-fonte (ex.: CI/CD, dependências)
+docs	Atualização de documentação
+style	Alteração de formatação (ex.: espaçamento, indentação)
+test	Adição ou melhoria de testes
+refactor	Melhorias no código sem alterar comportamento
+perf	Melhorias de performance
