@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 //pages
 import Home from './pages/Home'
 import Projects from './pages/Projects'
+
 import Company from './pages/Company'
 import Contact from './pages/Contact'
 import Register from './pages/Auth/Register';
@@ -13,7 +14,7 @@ import ForgotPassword from './pages/Auth/ForgotPassword';
 
 //components
 import Header from './components/Header';
-
+import NewProjects from './components/NewProjects'
 //context
 import { AuthProvider } from './context/authContext';
  
@@ -31,6 +32,7 @@ function App() {
                         <Route path='/register' element={<Register />} />
                         <Route path='/login' element={<Login />} />
                         <Route path='/reset' element={<ForgotPassword />} />
+                        <Route path='/new-projects' element={<NewProjects />} />
                     </Routes>
                 </BrowserRouter>
             </AuthProvider>

@@ -1,9 +1,14 @@
+//components
+import Container from "../../components/Container"
+
 const Projects = () => {
     return (
-        <div>
-            <h1>Projects</h1>
-        </div>
+        <Container>
+
+            <h1>PROJECTS</h1>
+
+        </Container>
     )
 }
 
-export default Projects
+export default Projects 
