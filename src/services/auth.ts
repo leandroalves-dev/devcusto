@@ -1,6 +1,6 @@
-import { getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, User } from 'firebase/auth'
+import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, sendPasswordResetEmail} from 'firebase/auth'
 import { auth } from '../config/firebaseConfig' 
-import { AuthResponse, AuthError } from '../interface/authTypes'
+import { AuthResponse } from '../interface/authTypes'
 import { FirebaseError } from 'firebase/app'
 
 export const register = async(email: string, password: string, name: string): Promise<AuthResponse> => {
@@ -31,7 +31,6 @@ export const register = async(email: string, password: string, name: string): Pr
             throw new Error("Erro desconhecido. Tente novamente.");
         }
     }
-
 }
 
 export const login = async(email: string, password: string) => {

@@ -50,7 +50,6 @@ export const getAllProjects = async (): Promise<AllProjects[]> => {
 };
 
 //EDITAR PROJETO
-
 export const updateProject = async (projectId: string, updatedData: Partial<AllProjects>) => {
     try {
         const projectRef = doc(db, 'projects', projectId);

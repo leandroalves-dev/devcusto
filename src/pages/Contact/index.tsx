@@ -1,8 +1,10 @@
+import Container from "../../components/Container"
+
 const Contact = () => {
     return (
-        <div>
+        <Container>
             <h1>Contact</h1>
-        </div>
+        </Container>
     )
 }
 

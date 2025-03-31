@@ -7,7 +7,7 @@ interface MessageProps{
 
 const Message = ({title}: MessageProps) => {
   return (
-    <div className="flex flex-col w-full h-80 items-center justify-center text-neutral-700 text-[24px] bg-neutral-900 mb-10">
+    <div className="flex flex-col w-full h-65 items-center justify-center text-neutral-700 text-[24px] bg-neutral-900 mb-10">
         <BsInfoCircle size={45}  className="text-neutral-800" />
         {title}
     </div> 

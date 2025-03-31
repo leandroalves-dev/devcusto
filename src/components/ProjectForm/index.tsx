@@ -8,6 +8,7 @@ import Buttons from "../Buttons";
 import Input from "../Input";
 import Select from "../Select";
 import Loading from "../Loading";
+import AlertMessage from "../AlertMessage";
 
 //services
 import { createProject, updateProject } from "../../services/projectService";
@@ -15,8 +16,9 @@ import { createProject, updateProject } from "../../services/projectService";
 //context
 import { useProject } from "../../context/useProject";
 
+
 const ProjectForm = () => {
-    const { selectedProject } = useProject();
+    const { selectedProject, setSelectedProject } = useProject();
     const { categories } = useCategories();
 
     const [formData, setFormData] = useState({name: "", description: "", budget: "", category: ""});
@@ -88,8 +90,10 @@ const ProjectForm = () => {
 
             setLoading(false);
             setFormData({ name: "", description: "", budget: "", category: "" });
+            setSelectedProject(null)
 
             setTimeout(() => setSuccess(""), 2000);
+            
         } catch (error) {
             console.error(error);
             setError("Erro ao criar o projeto");
@@ -98,17 +102,18 @@ const ProjectForm = () => {
     };
 
     return (
-        <div className="mt-10">
+        <div className="pt-4">
             {loading && <Loading />}
             <form onSubmit={handleSubmit}>
                 <Input label="Nome do Projeto" type="text" name="name" value={formData.name} placeholder="Insira o nome do projeto" onChange={handleChange} />
                 <Input label="Descrição do Projeto" type="text" name="description" value={formData.description} placeholder="Insira uma breve descrição..." onChange={handleChange} />
-                <Input label="Orçamento" type="number" name="budget" value={formData.budget} placeholder="Insira o orçamento do projeto" onChange={handleChange} />
-                <Select name="category" label="Selecione a categoria" value={formData.category} options={categories} onChange={handleChange} />
-                <Buttons title="Criar Projeto" />
-
-                {error && <p className="bg-red-200 border border-red-300 text-center p-2 rounded-[3px] text-zinc-700">{error}</p>}
-                {success && <p className="bg-green-100 border border-green-300 text-center p-2 rounded-[3px] text-zinc-700">{success}</p>}
+                <div className="flex gap-3">
+                    <Input label="Orçamento" type="number" name="budget" value={formData.budget} placeholder="Insira o orçamento do projeto" onChange={handleChange} />
+                    <Select name="category" label="Selecione a categoria" value={formData.category} options={categories} onChange={handleChange} />
+                </div>
+                <Buttons title={`${selectedProject ? 'Editar Projeto' : 'Criar Projeto'}  `} />
+                <AlertMessage type="error" message={error} />
+                <AlertMessage type="success" message={success} />
             </form>
         </div>
     );

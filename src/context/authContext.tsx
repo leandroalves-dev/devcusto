@@ -31,7 +31,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           localStorage.setItem('user', JSON.stringify(userLogin.user)); 
 
         } catch (error) {
-  
           console.error('Erro no login:', error);
         }
 

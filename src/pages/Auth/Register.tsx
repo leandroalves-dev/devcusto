@@ -8,6 +8,7 @@ import Container from "../../components/Container"
 import Input from "../../components/Input"
 import Buttons from "../../components/Buttons"
 import Loading from "../../components/Loading"
+import AlertMessage from "../../components/AlertMessage"
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -74,8 +75,8 @@ const Register = () => {
                     
                     <Buttons title="Cadastrar" />
                 
-                    {error && (<p className="bg-red-200 border border-red-300 text-center p-2 rounded-[3px] text-zinc-700">{error}</p>)}
-                    {success && (<p className="bg-green-100 boder border-green-300 text-center p-2 rounded-[3px] text-zinc-700">{success}</p>)}
+                    <AlertMessage type="error" message={error} />
+                    <AlertMessage type="success" message={success} /> 
                 </form>
             </div>
 

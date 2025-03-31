@@ -1,18 +1,29 @@
-import { BsBookmarkFill, BsPencil, BsTrash } from "react-icons/bs";
-import Container from "../../components/Container";
-import LinkButton from "../../components/LinkButton";
-import { useProjects } from "../../hook/useProjects";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Swal from 'sweetalert2'
 import 'sweetalert2/src/sweetalert2.scss'
 
-import { deleteProject } from "../../services/projectService";
-import { useEffect, useState } from "react";
+//icons
+import { BsBookmarkFill, BsPencil, BsTrash } from "react-icons/bs";
+
+//components
+import Message from "../../components/Message";
+import Container from "../../components/Container";
+import LinkButton from "../../components/LinkButton";
+
+//hooks
+import { useProjects } from "../../hook/useProjects";
+
+//interface
 import { AllProjects } from "../../interface/projects";
 
-import { useNavigate } from "react-router-dom";
+//serviços
+import { deleteProject } from "../../services/projectService";
+
+//context
 import { useProject } from "../../context/useProject";
-import Message from "../../components/Message";
+
 
 const ProjectList = () => {
     const { projects: initialProjects, loading, error } = useProjects();

@@ -1,14 +1,15 @@
 import { FormEvent, useState } from "react";
+import { Link } from "react-router-dom";
 
 //components
 import Container from "../../components/Container"
 import Loading from "../../components/Loading"
 import Input from "../../components/Input";
 import Buttons from "../../components/Buttons";
+import AlertMessage from "../../components/AlertMessage";
 
 // context
 import { useAuth } from "../../context/useAuth";
-import { Link } from "react-router-dom";
 
 const Login = () => {
 
@@ -42,7 +43,7 @@ const Login = () => {
         setLoading(true);
 
         try {
-            await login(formData.email, formData.password); // Usando a função de login do AuthContext
+            await login(formData.email, formData.password);
             setLoading(false);
             setSuccess('Login efetuado com sucesso!');
             setTimeout(() => { setSuccess('') }, 2000);
@@ -75,8 +76,8 @@ const Login = () => {
                         <Link to="/reset" className="text-white underline hover:no-underline">Esqueceu a senha?</Link>
                     </div>
                 
-                    {error && (<p className="bg-red-200 border border-red-300 text-center p-2 rounded-[3px] text-zinc-700">{error}</p>)}
-                    {success && (<p className="bg-green-100 boder border-green-300 text-center p-2 rounded-[3px] text-zinc-700">{success}</p>)}
+                    <AlertMessage type="error" message={error} />
+                    <AlertMessage type="success" message={success} />           
                 </form>
             </div>
 

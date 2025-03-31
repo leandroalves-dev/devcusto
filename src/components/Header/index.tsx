@@ -2,18 +2,13 @@ import { useState} from "react";
 import { Link } from "react-router-dom"
 
 //icons
-import { BsJustify, BsLock, BsPersonFill, BsX } from "react-icons/bs"
-import { FiLogOut } from "react-icons/fi";
+import { BsJustify, BsX } from "react-icons/bs"
 
 //components
 import Container from "../Container"
-//services
-import { useAuth  } from "../../context/useAuth";
+import Welcome from "../Welcome";
 
 const Header = () => {
-
-    console.log("Header rendered");
-    const { user, logout } = useAuth();
 
     const [menuOpen, setMenuOpen] = useState(false);
     
@@ -24,21 +19,7 @@ const Header = () => {
                 <Container>
                     <nav>
                         <ul className="flex justify-end items-center gap-4 h-10">
-
-                            {user ? (
-                                <>
-                                    <li>Bem-vindo {user.displayName}</li>
-                                    <li className="flex items-center hover:text-white cursor-pointer" onClick={logout}><FiLogOut /></li>
-                                </>
-                            ):(
-                                <>
-                                    <li>Olá visitante!</li>
-                                    <li className="flex items-center hover:text-white cursor-pointer"><BsLock /> <Link to='/register'>Cadastrar</Link></li>
-                                    <li className="flex items-center hover:text-white cursor-pointer"><BsPersonFill /> <Link to="/login">Entrar</Link></li>
-                                </>
-                            )}
-
-                            
+                            <Welcome />
                         </ul>
                     </nav>
                 </Container>
@@ -82,18 +63,7 @@ const Header = () => {
                     <div className="p-4">
                         <nav>
                             <ul className="flex flex-col gap-2">
-                                {user ? (
-                                    <>
-                                        <li>Bem-vindo {user.displayName}</li>
-                                        <li className="flex items-center hover:text-white cursor-pointer" onClick={logout}><FiLogOut /></li>
-                                    </>
-                                ):(
-                                    <>
-                                        <li>Olá visitante!</li>
-                                        <li className="flex items-center hover:text-white cursor-pointer"><BsLock /> <Link to='/register'>Cadastrar</Link></li>
-                                        <li className="flex items-center hover:text-white cursor-pointer"><BsPersonFill /> <Link to="/login">Entrar</Link></li>
-                                    </>
-                                )}
+                                <Welcome />
                             </ul>
                         </nav>
 

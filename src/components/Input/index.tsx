@@ -1,5 +1,3 @@
-import React from "react"
-
 interface InputProps{
     name: string
     value: string
@@ -8,7 +6,6 @@ interface InputProps{
     placeholder: string
     type: string
 }
-
 
 const Input = ({ label, type, value, name, placeholder, onChange}: InputProps) => {
     return (
