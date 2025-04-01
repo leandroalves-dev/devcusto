@@ -1,5 +1,5 @@
 import { db  } from '../config/firebaseConfig'
-import { collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, doc, deleteDoc, updateDoc, getDoc } from 'firebase/firestore';
 import { AllProjects } from '../interface/projects'
 
 //CRIAR NOVO PROJEJTO
@@ -49,6 +49,33 @@ export const getAllProjects = async (): Promise<AllProjects[]> => {
     }
 };
 
+//BUSCAR PROJETO POR ID
+export const getProjectById = async (projectId: string) => {
+    try {
+        const projectRef = doc(db, "projects", projectId);
+        const projectSnap = await getDoc(projectRef);
+
+        if (!projectSnap.exists()) {
+            throw new Error("Projeto não encontrado");
+        }
+
+        const projectData = projectSnap.data();
+
+        return {
+            id: projectSnap.id,
+            name: projectData.name || "",
+            description: projectData.description || "",
+            budget: projectData.budget || 0,
+            category: projectData.category ? projectData.category : { id: "0", name: "Sem categoria" },
+            cost: projectData.cost || 0,
+            services: projectData.services || []
+        };
+    } catch (error) {
+        console.error("Erro ao buscar projeto:", error);
+        throw new Error("Erro ao buscar projeto");
+    }
+};
+
 //EDITAR PROJETO
 export const updateProject = async (projectId: string, updatedData: Partial<AllProjects>) => {
     try {
@@ -73,4 +100,3 @@ export const deleteProject = async (projectId: string) => {
         console.log('Projeto deletado com sucesso!', error)
     }
 }
-

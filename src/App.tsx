@@ -10,6 +10,7 @@ import Contact from './pages/Contact'
 import Register from './pages/Auth/Register';
 import Login from './pages/Auth/Login';
 import ForgotPassword from './pages/Auth/ForgotPassword';
+import ProjectEdit from './pages/ProjectEdit';
 
 //components
 import Header from './components/Header';
@@ -36,6 +37,7 @@ function App() {
                             <Route path='/login' element={<Login />} />
                             <Route path='/reset' element={<ForgotPassword />} />
                             <Route path='/new-projects' element={<NewProjects />} />
+                            <Route path='/projects/:id' element={<ProjectEdit />} />
                         </Routes>
                         <Footer />
                     </BrowserRouter>

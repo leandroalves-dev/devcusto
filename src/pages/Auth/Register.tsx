@@ -52,10 +52,7 @@ const Register = () => {
             if (error instanceof Error) {
                 setError(error.message)
                 throw new Error("Erro ao registrar. Tente novamente.");
-
-              } else {
-                throw new Error("Erro desconhecido. Tente novamente.");
-            }
+              }
         } finally{
             setLoading(false)
         }

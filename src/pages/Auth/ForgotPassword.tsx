@@ -35,8 +35,6 @@ const ForgotPassword = () => {
             if (error instanceof Error) {
                 setError(error.message);
                 throw new Error('Erro desconhecido. Tente novamente');
-            } else {
-                throw new Error('Erro desconhecido. Tente novamente');
             }
         }
     }
