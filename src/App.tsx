@@ -20,7 +20,10 @@ import Footer from './components/Footer';
 //context
 import { AuthProvider } from './context/authContext';
 import { ProjectProvider } from './context/ProjectContext';
- 
+
+//routes
+import ProtectedRoute from './routes/protectedRoute';
+
 function App() {
     return (
         <div className='bg-neutral-950 flex flex-col min-h-screen'>
@@ -28,17 +31,17 @@ function App() {
                 <ProjectProvider>
                     <BrowserRouter>
                         <Header />
-                        <Routes>
-                            <Route path='/' element={<Home />} />
-                            <Route path='/projects' element={<Projects />} />
-                            <Route path='/company' element={<Company />} />
-                            <Route path='/contact' element={<Contact />} />
-                            <Route path='/register' element={<Register />} />
-                            <Route path='/login' element={<Login />} />
-                            <Route path='/reset' element={<ForgotPassword />} />
-                            <Route path='/new-projects' element={<NewProjects />} />
-                            <Route path='/projects/:id' element={<ProjectEdit />} />
-                        </Routes>
+                            <Routes>
+                                <Route path='/' element={<Home />} />
+                                <Route path='/company' element={<Company />} />
+                                <Route path='/contact' element={<Contact />} />
+                                <Route path='/register' element={<Register />} />
+                                <Route path='/login' element={<Login />} />
+                                <Route path='/reset' element={<ForgotPassword />} />
+                                <Route path='/projects' element={<ProtectedRoute><Projects /></ProtectedRoute>} />
+                                <Route path='/new-projects' element={<ProtectedRoute><NewProjects /></ProtectedRoute>} />
+                                <Route path='/projects/:id' element={<ProtectedRoute><ProjectEdit /></ProtectedRoute>} />
+                            </Routes>                       
                         <Footer />
                     </BrowserRouter>
                 </ProjectProvider>
@@ -47,4 +50,4 @@ function App() {
     )
 }
 
-export default App
+export default App;

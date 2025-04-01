@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useState, ReactNode, useEffect } from 'react';
 import { signInWithEmailAndPassword, User } from 'firebase/auth'; 
@@ -23,17 +24,32 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }, []);
   
     const login = async (email: string, password: string) => {
-       
         try {
-
-          const userLogin = await signInWithEmailAndPassword(auth, email, password);
-          setUser(userLogin.user); 
-          localStorage.setItem('user', JSON.stringify(userLogin.user)); 
-
-        } catch (error) {
-          console.error('Erro no login:', error);
+            const userLogin = await signInWithEmailAndPassword(auth, email, password);
+            setUser(userLogin.user);
+            localStorage.setItem('user', JSON.stringify(userLogin.user));
+        } catch (error: any) {
+            let errorMessage = "Erro ao fazer login. Tente novamente.";
+            switch (error.code) {
+                case "auth/user-not-found":
+                    errorMessage = "Usuário não encontrado.";
+                    break;
+                case "auth/wrong-password":
+                    errorMessage = "Senha incorreta.";
+                    break;
+                case "auth/invalid-email":
+                    errorMessage = "E-mail inválido.";
+                    break;
+                case "auth/invalid-credential":
+                    errorMessage = "E-mail ou senha incorretos."; 
+                    break;
+                case "auth/too-many-requests":
+                    errorMessage = "Muitas tentativas! Tente novamente mais tarde.";
+                    break;
+            }
+    
+            throw new Error(errorMessage);
         }
-
     };
   
     const logout = () => {

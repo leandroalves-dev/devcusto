@@ -29,6 +29,7 @@ const ForgotPassword = () => {
 
             const response = await resetPassword(email)
             setMessage(response);
+            setTimeout(() => setMessage(''), 2000);
             setEmail('')
             
         } catch (error: unknown) {
@@ -51,6 +52,7 @@ const ForgotPassword = () => {
                     <Input label="E-mail" type="text" name="email" value={email} placeholder="Digite seu e-mail..." onChange={handleInputChange} />
                     <Buttons title="Enviar e-mail" />
                     <AlertMessage type="error" message={error} />
+                    <AlertMessage type="success" message={message} />
                 </form>
             </div>
         </Container>

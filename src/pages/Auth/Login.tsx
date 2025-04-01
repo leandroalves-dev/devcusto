@@ -32,32 +32,35 @@ const Login = () => {
     };
     
     const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault()
-
-        if(!formData.email || !formData.password){
-            setError('Preencha todos os campos')
-            setTimeout(() => { setError('') },2000)
+        e.preventDefault();
+    
+        if (!formData.email || !formData.password) {
+            setError('Preencha todos os campos');
+            setTimeout(() => setError(''), 2000);
             return;
         }
-
+    
         setLoading(true);
-
+        setError('');
+        setSuccess('');
+    
         try {
             await login(formData.email, formData.password);
-            setLoading(false);
+    
             setSuccess('Login efetuado com sucesso!');
-            setTimeout(() => { setSuccess('') }, 2000);
-            setError('');
+            setTimeout(() => setSuccess(''), 2000);
             setFormData({ email: '', password: '' });
+    
         } catch (error) {
-            if (error instanceof Error) {
-                setError(error.message);
-                throw new Error('Erro desconhecido. Tente novamente');
-            }
+            setError(error instanceof Error ? error.message : 'Erro ao fazer login.');
+            setTimeout(() => setError(''), 3000);
         } finally {
             setLoading(false);
         }
-    }
+    };
+    
+    
+    
 
     return (
         <Container>
