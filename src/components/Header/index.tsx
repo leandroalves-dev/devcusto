@@ -47,8 +47,8 @@ const Header = () => {
                     <nav>
                         <ul className="flex gap-5 text-white text-[18px]">
                             <li><Link to="/">Home</Link></li>
+                            <li><Link to="/company">Sobre</Link></li>
                             <li><Link to="/projects">Projetos</Link></li>
-                            <li><Link to="/company">Compania</Link></li>
                             <li><Link to="/contact">Contato</Link></li>
                         </ul>
                     </nav>

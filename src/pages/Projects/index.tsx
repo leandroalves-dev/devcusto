@@ -60,7 +60,15 @@ const ProjectList = () => {
             await deleteProject(projectId);
             setProjects((prevProjects) => prevProjects.filter(project => project.id !== projectId));
 
-            Swal.fire('Excluído!', 'O projeto foi removido com sucesso.', 'success');
+            Swal.fire({
+                title: 'Excluído!',
+                text: 'O projeto foi removido com sucesso.',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                customClass: {
+                    confirmButton: 'btn-modal' // Classe personalizada para o botão OK
+                }
+            });
 
         } catch (error) {
             console.error('Erro ao excluir o projeto', error);
@@ -88,7 +96,9 @@ const ProjectList = () => {
                    
                     {projects.map(project => (
                         <li key={project.id} className="bg-neutral-900 mb-5 text-zinc-400">
-                            <h3 className="p-3 text-center bg-[#FF3C32] text-white capitalize">{project.name}</h3>
+                            <h3 className="p-3 h-[60px] flex items-center text-left leading-4 bg-neutral-800 text-white capitalize">
+                                {project.name}
+                            </h3>
                             <div className="p-3 flex flex-col gap-1">
                                 <p className="text-sm leading-4 my-3 border-b border-neutral-800 pb-4">{project.description}</p>
                                 <p className="text-sm flex justify-between items-center">

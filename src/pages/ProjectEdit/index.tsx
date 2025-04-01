@@ -151,7 +151,7 @@ const ProjectEdit = () => {
             <div className="flex flex-col mb-10">
                 <h2 className="text-white text-2xl pb-3 mb-3">Serviços</h2>
                 {project?.services.length === 0 && (
-                    <h2 className="text-zinc-500 mt-5">No momento, não temos serviços cadastrados</h2>
+                    <h2 className="text-zinc-500">No momento, não temos serviços cadastrados</h2>
                 )}
                 <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-white">
                     {project?.services.map((service, index) => (

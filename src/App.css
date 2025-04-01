@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+.btn-modal{
+    background: #FF3C32;
+    width: 100px;
+}
+
+div:where(.swal2-icon).swal2-success [class^=swal2-success-line]{
+    background-color: #FF3C32 !important;
+}
+
+div:where(.swal2-icon).swal2-success .swal2-success-ring{
+    border: 1px solid #FF3C32 !important;
+}
