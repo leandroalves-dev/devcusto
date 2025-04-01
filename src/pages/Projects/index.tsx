@@ -24,6 +24,8 @@ import { deleteProject } from "../../services/projectService";
 //context
 import { useProject } from "../../context/useProject";
 
+//utils
+import { formatCurrency } from "../../utils";
 
 const ProjectList = () => {
     const { projects: initialProjects, loading, error } = useProjects();
@@ -65,10 +67,7 @@ const ProjectList = () => {
             Swal.fire('Erro!', 'Ocorreu um erro ao excluir o projeto.', 'error');
         }
     }; 
-
-    const formatCurrency = (value: number) => {
-        return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-    };
+    
 
     if (loading) return <p>Carregando projetos...</p>;
     if (error) return <p>Erro: {error}</p>;

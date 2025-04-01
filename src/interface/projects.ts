@@ -2,6 +2,12 @@ export interface Category {
     id: number;
     name: string;
 }
+export interface Service {
+    id: string;
+    name: string;
+    cost: number;
+    description: string;
+}
 export interface AllProjects {
     id: string;
     name: string;
@@ -9,5 +15,5 @@ export interface AllProjects {
     budget: number;
     category: Category;
     cost: number,
-    services: string[]
+    services: Service[]
 }

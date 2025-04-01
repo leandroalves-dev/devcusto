@@ -1,6 +1,8 @@
 import { db  } from '../config/firebaseConfig'
 import { collection, addDoc, getDocs, doc, deleteDoc, updateDoc, getDoc } from 'firebase/firestore';
 import { AllProjects } from '../interface/projects'
+import { Service } from '../interface/projects';
+import { v4 as uuidv4 } from "uuid";
 
 //CRIAR NOVO PROJEJTO
 export const createProject = async (projectData: Omit<AllProjects, "id">) => {
@@ -12,8 +14,7 @@ export const createProject = async (projectData: Omit<AllProjects, "id">) => {
             cost: 0,
             services: []
         })
-        console.log("Projeto criado com ID", addProject.id);
-        console.log("Projeto criado", addProject);
+
         return addProject.id;
 
     } catch (error) {
@@ -100,3 +101,55 @@ export const deleteProject = async (projectId: string) => {
         console.log('Projeto deletado com sucesso!', error)
     }
 }
+
+//ADICIONANDO SERVIÇOS
+export const addService = async ( projectId: string, service: { name: string; cost: number; description: string }): Promise<{ id: string; name: string; cost: number; description: string }> => {
+    
+    try {
+      const projectRef = doc(db, "projects", projectId);
+      const projectSnap = await getDoc(projectRef);
+  
+      if (!projectSnap.exists()) {
+        throw new Error("Projeto não encontrado.");
+      }
+  
+      const projectData = projectSnap.data();
+    
+      const newService = {
+        id: uuidv4(),
+        ...service,
+      };
+  
+      const addServices = [...(projectData.services || []), newService];
+  
+      await updateDoc(projectRef, { services: addServices });
+
+      return newService;
+
+    } catch (error) {
+      console.log("Erro ao adicionar o serviço", error);
+      throw new Error("Falha ao adicionar o serviço");
+    }
+};
+
+//DELETANDO SERVIÇOS
+export const deleteService = async (projectId: string, serviceId: string) => {
+    const projectRef = doc(db, "projects", projectId);
+    const projectSnapshot = await getDoc(projectRef);
+
+    if (!projectSnapshot.exists()) {
+        throw new Error("Projeto não encontrado");
+    }
+
+    const projectData = projectSnapshot.data();
+
+    if (!projectData.services || !Array.isArray(projectData.services)) {
+        throw new Error("Lista de serviços não encontrada!");
+    }
+
+    const updatedServices = projectData.services.filter((s: Service) => {
+        return String(s.id) !== String(serviceId);
+    });
+
+    await updateDoc(projectRef, { services: updatedServices });
+};

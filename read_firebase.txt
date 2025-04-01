@@ -1,0 +1,22 @@
+🔥 Operações de CRUD no Firestore
+🟢 Criar / Adicionar Dados
+addDoc(collectionRef, data) → Adiciona um novo documento com um ID gerado automaticamente dentro de uma coleção.
+
+setDoc(docRef, data, { merge: true }) → Define ou sobrescreve um documento em um caminho específico. Se merge: true, ele atualiza apenas os campos especificados sem apagar os existentes.
+
+🔵 Ler / Buscar Dados
+getDoc(docRef) → Obtém um único documento pelo seu caminho e retorna seus dados.
+
+getDocs(collectionRef) → Busca todos os documentos de uma coleção e retorna uma lista deles.
+
+onSnapshot(docRef, callback) → Escuta em tempo real as mudanças de um documento ou coleção e executa um callback sempre que há uma atualização.
+
+🟡 Atualizar Dados
+updateDoc(docRef, { campo: valor }) → Atualiza campos específicos de um documento sem apagar os demais.
+
+setDoc(docRef, data, { merge: true }) → Também pode ser usado para atualizar dados, pois ele mescla as informações existentes.
+
+🔴 Deletar Dados
+deleteDoc(docRef) → Remove um documento do Firestore.
+
+updateDoc(docRef, { campo: deleteField() }) → Apaga apenas um campo específico dentro de um documento, sem deletar o documento inteiro.

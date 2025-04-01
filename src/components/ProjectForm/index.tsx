@@ -114,7 +114,7 @@ const ProjectForm = ({ project, onSuccess }: ProjectFormProps) => {
                     <Input label="Orçamento" type="number" name="budget" value={formData.budget} placeholder="Insira o orçamento do projeto" onChange={handleChange} />
                     <Select name="category" label="Selecione a categoria" value={formData.category} options={categories} onChange={handleChange} />
                 </div>
-                <Buttons title={`${project ? 'Editar Projeto' : 'Criar Projeto'}  `} />
+                <Buttons title={`${project ? 'Editar' : 'Criar Projeto'}  `} />
                 <AlertMessage type="error" message={error} />
                 <AlertMessage type="success" message={success} />
             </form>
