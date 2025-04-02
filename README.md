@@ -93,6 +93,7 @@ export { auth };
 
 ![Image](https://github.com/user-attachments/assets/f5e3b480-e855-4f31-9fdd-1589556c473a)
 
+_Obs: Na página de contato, os dados não estão sendo enviados para o banco de dados, e sim para o console como demonstração apenas._
 
 ## Como rodar o projeto
 
