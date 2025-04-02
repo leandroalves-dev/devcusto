@@ -68,7 +68,7 @@ const Header = () => {
                         </nav>
 
                         <nav className="mt-4">
-                            <ul className="flex flex-col gap-2 text-white text-[18px]">
+                            <ul className="flex flex-col gap-2 text-white text-[18px]" onClick={() => setMenuOpen(false)}>
                                 <li className="border-b-1 border-white/20 pb-2"><Link to="/">Home</Link></li>
                                 <li className="border-b-1 border-white/20 pb-2"><Link to="/projects">Projetos</Link></li>
                                 <li className="border-b-1 border-white/20 pb-2"><Link to="/company">Compania</Link></li>

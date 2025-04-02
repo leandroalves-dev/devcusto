@@ -1,6 +1,10 @@
-import { Category } from "../interface/projects";
-import { getProject } from "../api/projectsServices";
 import { useEffect, useState } from "react";
+
+//interface
+import { Category } from "../interface/projects";
+
+//api
+import { getProject } from "../api/projectsServices";
 
 export const useCategories = () => {
     

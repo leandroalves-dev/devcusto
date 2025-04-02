@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
+//icons
+import { BsTrash } from "react-icons/bs";
 
 //serviços
 import { addService, deleteService, getProjectById } from "../../services/projectService";
@@ -15,7 +19,6 @@ import ServiceForm from "../../components/ServiceForm";
 
 //utils
 import { formatCurrency } from "../../utils";
-import { BsTrash } from "react-icons/bs";
 
 const ProjectEdit = () => {
     const { id } = useParams(); 
@@ -67,7 +70,11 @@ const ProjectEdit = () => {
         console.log('newTotalCost', newTotalCost)
 
         if (newTotalCost > project.budget) {
-            alert("O custo total dos serviços não pode ultrapassar o orçamento!");
+            Swal.fire({
+                title: 'Opss!',
+                text: 'O custo total dos serviços não pode ultrapassar o orçamento!',
+                icon: 'info',
+            });
             return;
         }
 

@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
+
+//services
 import { getAllProjects } from "../services/projectService";
+
+//interface
 import { AllProjects } from "../interface/projects"
 
 export const useProjects = () => {

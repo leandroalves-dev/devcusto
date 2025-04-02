@@ -1,12 +1,13 @@
-//components
 import { useState } from "react"
+
+//components
 import Buttons from "../../components/Buttons"
 import Input from "../../components/Input"
 import Container from "../../components/Container"
+import AlertMessage from "../../components/AlertMessage"
 
 //auth
 import { resetPassword } from "../../services/auth"
-import AlertMessage from "../../components/AlertMessage"
 
 const ForgotPassword = () => {
 

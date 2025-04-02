@@ -1,8 +1,10 @@
 import { db  } from '../config/firebaseConfig'
 import { collection, addDoc, getDocs, doc, deleteDoc, updateDoc, getDoc } from 'firebase/firestore';
+import { v4 as uuidv4 } from "uuid";
+
+//interface
 import { AllProjects } from '../interface/projects'
 import { Service } from '../interface/projects';
-import { v4 as uuidv4 } from "uuid";
 
 //CRIAR NOVO PROJEJTO
 export const createProject = async (projectData: Omit<AllProjects, "id">) => {

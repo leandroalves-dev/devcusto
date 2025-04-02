@@ -22,7 +22,7 @@ import { AuthProvider } from './context/authContext';
 import { ProjectProvider } from './context/ProjectContext';
 
 //routes
-import ProtectedRoute from './routes/protectedRoute';
+import ProtectedRoute from './routes/ProtectedRoute'
 
 function App() {
     return (
