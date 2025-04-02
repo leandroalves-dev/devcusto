@@ -83,6 +83,17 @@ export { auth };
 -   Copie o JSON de configuração do Firebase e adicione no seu código:
 
 
+**Demonstração do projeto**
+
+![Image](https://github.com/user-attachments/assets/c8f001cf-fa60-411a-a0ec-939cf9acf187)
+
+![Image](https://github.com/user-attachments/assets/934ac637-64e8-44e6-b192-9fd79ccb5003)
+
+![Image](https://github.com/user-attachments/assets/9578eced-977d-41a2-a183-ec8ae012d399)
+
+![Image](https://github.com/user-attachments/assets/f5e3b480-e855-4f31-9fdd-1589556c473a)
+
+
 ## Como rodar o projeto
 
 1. Clone este repositório:
