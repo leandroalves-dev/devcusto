@@ -13,19 +13,75 @@ Com o DevCusto, você mantém controle total sobre os investimentos, organizando
 - ![Axios Badge](https://img.shields.io/badge/Axios-5A29E4?logo=axios&logoColor=white)
 - ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
 
-## Firebase Database no DevCusto
+O **DevCusto** utiliza o Firebase Database para armazenar e gerenciar os projetos de forma segura e eficiente.
 
-O DevCusto utiliza o Firebase Database para armazenar e gerenciar os projetos de forma segura e eficiente.
-
-Passos para configurar o Firebase Database:
-
-Funcionalidades principais:
+**Funcionalidades principais:**
 
 -  **Autenticação obrigatória:** Para criar e gerenciar projetos, o usuário precisa estar logado.
 -  **CRUD de Projetos:** O sistema permite criar, editar e excluir projetos diretamente no banco de dados.
 -  **Armazenamento em tempo real:** As alterações nos projetos são refletidas instantaneamente.
 
-Com essa abordagem, garantimos um gerenciamento de projetos organizado e acessível apenas para usuários autenticados.
+_Com essa abordagem, garantimos um gerenciamento de projetos organizado e acessível apenas para usuários autenticados._
+
+## Configurando Firebase Authentication no DevCusto
+
+1.   **Criar e Configurar um Projeto no Firebase**
+
+-   Acesse o Firebase Console.
+-   Clique em Adicionar Projeto e siga as instruções para criá-lo.
+-   No painel do Firebase, vá até Build → Authentication.
+-   Clique na aba Sign-in method.
+-   Habilite a opção E-mail/Senha e clique em Salvar.
+
+2.   **Instalar o Firebase no Projeto**
+
+-   npm install firebase
+
+3.   **Configurar o Firebase no Projeto**
+
+-   Vá até Configurações do Projeto → Configuração → Credenciais.
+-   Copie o JSON de configuração do Firebase e adicione no seu código:
+
+```javascript
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+
+const firebaseConfig = {
+  apiKey: "VITE_FIREBASE_API_KEY",
+  authDomain: "VITE_FIREBASE.firebaseapp.com",
+  projectId: "VITE_FIREBASE_PROJETO",
+  storageBucket: "VITE_FIREBASE.appspot.com",
+  messagingSenderId: "VITE_FIREBASE_ID",
+  appId: "VITE_FIREBASE_APP_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+export { auth };
+````
+
+## Configurando Firebase Database no DevCusto
+
+1.   **Criar e Ativar o Firestore no Firebase Console**
+
+-   Acesse o Firebase Console.
+-   Selecione seu projeto DevCusto ou crie um novo.
+-   No menu esquerdo, clique em Firestore Database (em "Build").
+-   Clique em Criar Banco de Dados.
+-   Escolha o modo "Modo de Produção" (ou "Modo de Teste" se for para testes).
+-   Selecione um local para o banco de dados (pode ser us-central1 ou outro próximo de sua região).
+-   Clique em Criar e aguarde a configuração ser concluída.
+
+2.   **Instalar o Firebase no Projeto**
+
+-   npm install firebase (se não estiver instalado)
+
+3.   **Configurar o Firebase no Projeto (seguir o mesmo passo do item 3 acima)**
+
+-   Vá até Configurações do Projeto → Configuração → Credenciais.
+-   Copie o JSON de configuração do Firebase e adicione no seu código:
+
 
 ## Como rodar o projeto
 
