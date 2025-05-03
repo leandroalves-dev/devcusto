@@ -102,6 +102,8 @@ const ProjectForm = ({ project, onSuccess }: ProjectFormProps) => {
         }
     };
 
+    console.log(selectedProject)
+
     return (
         <div className="pt-4">
             {loading && <Loading />}

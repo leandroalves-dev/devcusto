@@ -28,7 +28,7 @@ const Header = () => {
             <Container className="md:flex justify-between items-center pt-6">
                 
                 <Link to='/' className="flex gap-4 items-center justify-center sm:justify-center">
-                    <img src={`/logo.png?${new Date().getTime()}`} alt="DevCusto" />
+                    <img src={`./logo.png?${new Date().getTime()}`} alt="DevCusto" />
                     <div className="flex flex-col leading-5">
                         <h1 className="text-2xl text-white">Dev<span className="text-[#FF3C32]">Custo</span></h1>
                         <h2 className="text-white text-sm sm:text-[12px] ">O melhor custo e desenvolvimento</h2>
