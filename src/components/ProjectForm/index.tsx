@@ -105,7 +105,7 @@ const ProjectForm = ({ project, onSuccess }: ProjectFormProps) => {
     console.log(selectedProject)
 
     return (
-        <div className="pt-4">
+        <div className="pt-4 mb-10">
             {loading && <Loading />}
             <form onSubmit={handleSubmit}>
                 <Input label="Nome do Projeto" type="text" name="name" value={formData.name} placeholder="Insira o nome do projeto" onChange={handleChange} />

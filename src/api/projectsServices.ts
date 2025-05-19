@@ -3,7 +3,7 @@ import Api from './axios';
 export const getProject = async() => {
     try {
 
-        const response = await Api.get('/json/devCusto/api.json')
+        const response = await Api.get('/devcusto/json/api.json')
         //console.log('Retorna as categorias', response.data)
         return response.data
         
