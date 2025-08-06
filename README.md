@@ -85,7 +85,15 @@ export { auth };
 
 **Demonstração do projeto**
 
-![Image](https://github.com/user-attachments/assets/c8f001cf-fa60-411a-a0ec-939cf9acf187) ![Image](https://github.com/user-attachments/assets/934ac637-64e8-44e6-b192-9fd79ccb5003) ![Image](https://github.com/user-attachments/assets/9578eced-977d-41a2-a183-ec8ae012d399) ![Image](https://github.com/user-attachments/assets/f5e3b480-e855-4f31-9fdd-1589556c473a)
+<img width="400" height="200" alt="Image" src="https://github.com/user-attachments/assets/89973f7f-2ddf-4b56-aed5-93a6d2bc06fc" />
+<img width="400" height="200" alt="Image" src="https://github.com/user-attachments/assets/830740f9-e5f4-4e3e-8937-e4bbca2385e9" />
+<img width="400" height="200" alt="Image" src="https://github.com/user-attachments/assets/67535c4e-5810-4ad5-acba-200773f3b18e" />
+<img width="400" height="200" alt="Image" src="https://github.com/user-attachments/assets/43ec64dd-af05-4df5-839a-a594d5bb9877" />
+<img width="400" height="200" alt="Image" src="https://github.com/user-attachments/assets/bae7ba72-2c19-4c48-a10b-edc751483049" />
+<img width="400" height="200" alt="Image" src="https://github.com/user-attachments/assets/cf024f07-664a-42a1-a862-5dd03e4b200a" />
+<img width="400" height="200" alt="Image" src="https://github.com/user-attachments/assets/e061a3d2-3b53-44ad-af46-3b1dfef758e8" />
+<img width="400" height="200" alt="Image" src="https://github.com/user-attachments/assets/e09b1e2c-dc93-4c3a-83b4-130edc00da82" />
+<img width="400" height="200" alt="Image" src="https://github.com/user-attachments/assets/61e5f3ca-15bc-43bd-9b80-4688f8cab90d" />
 
 _Obs: Na página de contato, os dados não estão sendo enviados para o banco de dados, e sim para o console como demonstração apenas._
 
