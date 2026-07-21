@@ -29,7 +29,7 @@ function App() {
         <div className='bg-neutral-950 flex flex-col min-h-screen'>
             <AuthProvider>
                 <ProjectProvider>
-                    <BrowserRouter basename='/projects/devcusto/'>
+                    <BrowserRouter>
                         <Header />
                             <Routes>
                                 <Route path='/' element={<Home />} />

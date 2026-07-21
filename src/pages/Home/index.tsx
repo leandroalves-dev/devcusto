@@ -18,7 +18,7 @@ const Home = () => {
                 <p className="text-zinc-800 mb-1">Comece a gerencia os seus projetos agora mesmo!</p>
                 <LinkButton to="/new-projects" text="Criar Projeto" onClick={() => setSelectedProject(null)} />
                 <div className="w-76">
-                    <img src="./img-home.svg" alt="DevCusto" />
+                    <img src="/img-home.svg" alt="DevCusto" />
                 </div>
             </div>
 

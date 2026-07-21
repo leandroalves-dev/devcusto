@@ -1,0 +1,139 @@
+---
+description: DevCusto project stack overview, dependency versions, and best practices for each technology
+globs: **/*.{ts,tsx,js,jsx,json,css,scss}
+alwaysApply: true
+---
+
+# DevCusto — Stack & Versions
+
+## Core Stack
+
+| Dependency | Version | Purpose |
+|---|---|---|
+| React | ^19.0.0 | UI library |
+| React DOM | ^19.0.0 | DOM renderer |
+| TypeScript | ~5.7.2 | Type system |
+| Vite | ^6.2.0 | Build tool & dev server |
+| Tailwind CSS | ^4.0.17 | Utility-first CSS (via `@tailwindcss/vite` plugin) |
+
+## Routing & Data
+
+| Dependency | Version | Purpose |
+|---|---|---|
+| React Router DOM | ^7.4.0 | Client-side routing |
+| Axios | ^1.8.4 | HTTP client |
+| Firebase | ^11.5.0 | Authentication backend |
+| json-server | ^1.0.0-beta.3 | Mock REST API (dev) |
+
+## UI & Utilities
+
+| Dependency | Version | Purpose |
+|---|---|---|
+| SweetAlert2 | ^11.17.2 | Alert/modal dialogs |
+| react-icons | ^5.5.0 | Icon library |
+| uuid | ^11.1.0 | Unique ID generation |
+
+## Dev Tooling
+
+| Dependency | Version | Purpose |
+|---|---|---|
+| ESLint | ^9.21.0 | Linter (flat config) |
+| typescript-eslint | ^8.24.1 | TS linting rules |
+| eslint-plugin-react-hooks | ^5.1.0 | Hooks linting |
+| eslint-plugin-react-refresh | ^0.4.19 | Fast Refresh linting |
+| @vitejs/plugin-react | ^4.3.4 | Vite React integration |
+| sass-embedded | ^1.86.0 | SCSS compilation |
+
+## TypeScript Config
+
+- **Target**: ES2020
+- **Module**: ESNext with bundler resolution
+- **JSX**: react-jsx (automatic runtime)
+- **Strict mode**: enabled (`strict: true`, `noUnusedLocals`, `noUnusedParameters`)
+- Project references pattern: `tsconfig.json` → `tsconfig.app.json` + `tsconfig.node.json`
+
+## ESLint Config
+
+- Flat config format (`eslint.config.js`, no `.eslintrc`)
+- Extends: `@eslint/js` recommended + `typescript-eslint` recommended
+- Plugins: `react-hooks`, `react-refresh`
+- Ignores: `dist/`
+
+---
+
+## Best Practices by Version
+
+### React 19
+- Use `use()` hook for promises and context in components (new in 19)
+- Use `useFormStatus` and `useOptimistic` for form patterns
+- Server Components are supported but this project uses client-side only (Vite SPA)
+- Prefer `useId()` over uuid for React-generated IDs when possible
+
+### Tailwind CSS 4 (Vite plugin)
+- **Do NOT use `@apply` extensively** — prefer inline utility classes
+- Config is done via CSS (`@theme` in `index.css`) rather than `tailwind.config.js` — the existing `tailwind.config.js` is a legacy artifact from v3; ignore it or remove it
+- Use the `@tailwindcss/vite` plugin (already configured in `vite.config.ts`)
+- Custom theme values go in CSS `@theme { }` blocks, not JS config
+
+### Vite 6
+- Use `import.meta.env` for env variables (prefix with `VITE_`)
+- `vite.config.ts` uses ES module syntax
+- Plugins: `react()` and `tailwindcss()` already configured
+- `base` is not set (defaults to `/`); app runs at `http://localhost:5173`
+
+### React Router DOM 7
+- Use `createBrowserRouter` + `RouterProvider` pattern (data router)
+- Route definitions in `src/routes/`
+- Nested routes with `<Outlet />`
+- Loader/action pattern available but not yet adopted
+
+### Firebase 11
+- Config lives in `src/config/firebaseConfig.ts`
+- Auth methods: email/password, forgot password
+- Use Firebase Auth SDK modular imports (tree-shakeable)
+
+### Axios
+- Configured via `src/api/axios.ts` with base URL and interceptors
+- Base API URL from `json-server` for development
+- Use typed responses with TypeScript interfaces in `src/interface/`
+
+### ESLint 9 (Flat Config)
+- Config file: `eslint.config.js` (not `.eslintrc`)
+- Run with `npm run lint`
+- Flat config uses `export default tseslint.config(...)` pattern
+
+### TypeScript 5.7
+- Strict mode is ON — respect `noUnusedLocals` and `noUnusedParameters`
+- Use explicit return types on exported functions
+- Prefer `interface` over `type` for object shapes (already project convention)
+- Types/interfaces live in `src/interface/`
+
+---
+
+## Project Structure
+
+```
+src/
+├── api/            # Axios config & service calls
+├── assets/         # Static assets
+├── components/     # Reusable UI components
+├── config/         # Firebase config
+├── context/        # React Context providers
+├── hook/           # Custom hooks
+├── interface/      # TypeScript interfaces
+├── pages/          # Route page components
+├── routes/         # Route config & guards
+├── services/       # Business logic services
+├── utils/          # Utility functions
+├── App.tsx         # Root component
+└── main.tsx        # Entry point
+```
+
+## Conventions
+
+- Components use `index.tsx` pattern inside their folder (e.g., `components/Header/index.tsx`)
+- Pages follow the same `pages/PageName/index.tsx` pattern
+- CSS: use Tailwind utility classes; SCSS available via `sass-embedded` but prefer Tailwind
+- Alerts via `sweetalert2` — use `Swal.fire()` pattern
+- Auth state managed through `authContext.tsx` + `useAuth` hook
+- Project state through `ProjectContext.tsx` + `useProject` hook

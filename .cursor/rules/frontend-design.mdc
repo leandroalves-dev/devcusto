@@ -1,0 +1,442 @@
+---
+description: Premium Frontend Design Standards
+alwaysApply: false
+---
+
+# Premium Frontend Design Rules
+
+## Mission
+
+Every interface must feel like it was crafted by a senior product designer.
+
+Never generate layouts that look generic, templated, or AI-generated.
+
+Each screen should have its own identity, clear hierarchy, refined spacing, and premium visual quality.
+
+Prioritize craftsmanship over speed.
+
+---
+
+# Design References
+
+Use the following products as quality references:
+
+- Linear
+- Stripe
+- Vercel
+- Raycast
+- Apple
+- Notion
+- Framer
+- Clerk
+
+Do not copy their interfaces.
+
+Adopt their design principles, attention to detail, hierarchy, spacing, and visual polish.
+
+---
+
+# Design Philosophy
+
+Prefer:
+
+Less UI
+
+More whitespace
+
+Less decoration
+
+More intention
+
+Less color
+
+More contrast
+
+Less text
+
+More clarity
+
+Every visual decision must have a purpose.
+
+---
+
+# Design System
+
+Every project must follow a consistent design system.
+
+Define and maintain:
+
+- Typography scale
+- 8pt spacing grid
+- Consistent spacing
+- Consistent border radius
+- Elevation system
+- Color tokens
+- Interaction states
+
+Never mix different visual styles within the same application.
+
+---
+
+# Color System
+
+Build a palette that reflects the product's personality.
+
+Include at least:
+
+- Primary
+- Secondary
+- Accent
+- Background
+- Surface
+- Border
+- Text Primary
+- Text Secondary
+- Success
+- Warning
+- Error
+
+Prefer elegant, muted colors over highly saturated ones.
+
+Contrast should improve readability, not create visual noise.
+
+---
+
+# Typography
+
+Typography defines personality.
+
+Create a clear type hierarchy.
+
+Recommended scale:
+
+Display
+
+48
+
+40
+
+32
+
+Headings
+
+28
+
+24
+
+20
+
+Body
+
+18
+
+16
+
+14
+
+Caption
+
+12
+
+Use few font weights.
+
+Avoid excessive bold text.
+
+Let typography breathe with generous spacing.
+
+---
+
+# Spacing
+
+Follow an 8-point grid system.
+
+Use consistent spacing values such as:
+
+4
+
+8
+
+12
+
+16
+
+24
+
+32
+
+40
+
+48
+
+64
+
+96
+
+Never use arbitrary spacing.
+
+Consistency creates rhythm.
+
+---
+
+# Components
+
+Every component should have:
+
+- Clear visual hierarchy
+- Consistent padding
+- Predictable sizing
+- Clear interaction states
+- Excellent readability
+
+Avoid oversized components.
+
+---
+
+# Cards
+
+Cards should feel like surfaces, not boxes.
+
+Prefer:
+
+- Soft borders
+- Subtle elevation
+- Spacious padding
+- Clean layouts
+
+Avoid heavy shadows and unnecessary borders.
+
+---
+
+# Buttons
+
+Buttons communicate importance.
+
+Hierarchy:
+
+- Primary
+- Secondary
+- Ghost
+- Link
+
+Avoid multiple Primary buttons competing within the same area.
+
+---
+
+# Forms
+
+Forms should feel simple and effortless.
+
+Every input should include:
+
+- Visible labels
+- Comfortable height
+- Clear focus state
+- Error state
+- Disabled state
+- Helpful placeholders when appropriate
+
+Never rely solely on placeholders.
+
+---
+
+# Icons
+
+Use Lucide icons.
+
+Icons should communicate meaning.
+
+Never use decorative icons without purpose.
+
+---
+
+# Hero Sections
+
+The Hero section should immediately communicate the product's purpose.
+
+Avoid:
+
+- Generic KPI cards
+- Random gradients
+- Floating UI elements
+- Decorative statistics
+
+Prefer:
+
+- Strong headlines
+- Product mockups
+- Demonstrations
+- Interactive previews
+- Meaningful imagery
+
+---
+
+# Dashboard Design
+
+Dashboards should prioritize usability.
+
+Use:
+
+- Clean sidebar
+- Minimal header
+- Spacious layouts
+- Logical grouping
+- Clear information hierarchy
+
+Reduce unnecessary cards and containers.
+
+---
+
+# Layout
+
+Avoid:
+
+- Nested boxes
+- Excessive borders
+- Too many dividers
+- Dense interfaces
+
+Prefer:
+
+- Negative space
+- Alignment
+- Rhythm
+- Balance
+- Simplicity
+
+Whitespace is an active design element.
+
+---
+
+# Motion
+
+Animation should enhance usability.
+
+Prefer:
+
+- Framer Motion
+- Smooth transitions
+- Hover feedback
+- Fade animations
+- Scale animations
+- Subtle slide effects
+
+Avoid unnecessary animation.
+
+Respect `prefers-reduced-motion`.
+
+---
+
+# User Experience
+
+Every screen should answer:
+
+Where am I?
+
+What can I do here?
+
+What should I do next?
+
+Users should never feel lost.
+
+---
+
+# Interface States
+
+Always design for:
+
+- Loading
+- Skeleton
+- Empty
+- Error
+- Success
+
+Empty states should guide users toward meaningful actions.
+
+---
+
+# Responsive Design
+
+Design Mobile First.
+
+Desktop layouts should not simply scale mobile layouts.
+
+Reorganize content when larger screens allow better usability.
+
+---
+
+# Accessibility
+
+Every interface must include:
+
+- Visible keyboard focus
+- WCAG AA color contrast
+- Labels for inputs
+- aria-label where appropriate
+- Image alt text
+- Keyboard navigation support
+
+Accessibility is mandatory.
+
+---
+
+# Writing
+
+Interface copy should be concise, direct, and action-oriented.
+
+Avoid vague actions such as:
+
+- Submit
+- Continue
+- Click Here
+
+Prefer:
+
+- Create Project
+- Save Changes
+- Add Customer
+- Delete Category
+
+Use active voice consistently.
+
+---
+
+# Visual Quality Checklist
+
+Before completing any interface, verify:
+
+- Is there enough whitespace?
+- Is the visual hierarchy obvious?
+- Is there a clear focal point?
+- Are components visually consistent?
+- Does the interface feel calm and intentional?
+- Is every element serving a purpose?
+
+Remove unnecessary decoration.
+
+---
+
+# Self Review
+
+Before considering the interface finished, ask:
+
+Would this feel at home in a product like Apple?
+
+Would it match the quality of Linear?
+
+Would it fit within Stripe?
+
+Would it meet Vercel's standards?
+
+If not, continue refining.
+
+---
+
+# Final Principle
+
+Do not build interfaces that are simply functional.
+
+Build interfaces that are memorable.
+
+Every design decision should be intentional.
+
+Premium quality always takes priority over speed.
