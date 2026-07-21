@@ -89,6 +89,7 @@ const ProjectForm = ({ project, onSuccess }: ProjectFormProps) => {
                 });
 
                 setSuccess("Projeto cadastrado com sucesso!");
+                if (onSuccess) onSuccess();
             }
 
             setLoading(false);
