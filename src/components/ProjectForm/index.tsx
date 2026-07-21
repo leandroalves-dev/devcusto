@@ -18,16 +18,17 @@ import { useProject } from "../../context/useProject";
 
 //interface
 import { AllProjects } from "../../interface/projects";
+
 interface ProjectFormProps {
     project?: AllProjects;
-    onSuccess?: () => void; 
+    onSuccess?: () => void;
 }
 
 const ProjectForm = ({ project, onSuccess }: ProjectFormProps) => {
-    const { selectedProject, setSelectedProject } = useProject();
+    const { setSelectedProject } = useProject();
     const { categories } = useCategories();
     const [formData, setFormData] = useState({ name: "", description: "", budget: "", category: "" });
-    
+
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -60,7 +61,7 @@ const ProjectForm = ({ project, onSuccess }: ProjectFormProps) => {
         setLoading(true);
 
         try {
-            const selectedCategory = categories.find((cat) => cat.id === Number(category));
+            const selectedCategory = categories.find((cat) => String(cat.id) === String(category));
             if (!selectedCategory) {
                 setError("Categoria não encontrada");
                 setLoading(false);
@@ -76,7 +77,7 @@ const ProjectForm = ({ project, onSuccess }: ProjectFormProps) => {
                 });
 
                 setSuccess("Projeto atualizado com sucesso!");
-                if (onSuccess) onSuccess(); 
+                if (onSuccess) onSuccess();
             } else {
                 await createProject({
                     name,
@@ -102,19 +103,17 @@ const ProjectForm = ({ project, onSuccess }: ProjectFormProps) => {
         }
     };
 
-    console.log(selectedProject)
-
     return (
-        <div className="pt-4 mb-10">
+        <div className="pt-2">
             {loading && <Loading />}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="space-y-4">
                 <Input label="Nome do Projeto" type="text" name="name" value={formData.name} placeholder="Insira o nome do projeto" onChange={handleChange} />
-                <Input label="Descrição do Projeto" type="text" name="description" value={formData.description} placeholder="Insira uma breve descrição..." onChange={handleChange} />
-                <div className="flex gap-3">
-                    <Input label="Orçamento" type="number" name="budget" value={formData.budget} placeholder="Insira o orçamento do projeto" onChange={handleChange} />
-                    <Select name="category" label="Selecione a categoria" value={formData.category} options={categories} onChange={handleChange} />
+                <Input label="Descrição do Projeto" type="text" name="description" value={formData.description} placeholder="Insira uma breve descrição" onChange={handleChange} />
+                <div className="flex gap-4">
+                    <Input label="Orçamento" type="number" name="budget" value={formData.budget} placeholder="Insira o orçamento" onChange={handleChange} />
+                    <Select name="category" label="Categoria" value={formData.category} options={categories} onChange={handleChange} />
                 </div>
-                <Buttons title={`${project ? 'Editar' : 'Criar Projeto'}  `} />
+                <Buttons title={project ? 'Salvar Alterações' : 'Criar Projeto'} />
                 <AlertMessage type="error" message={error} />
                 <AlertMessage type="success" message={success} />
             </form>

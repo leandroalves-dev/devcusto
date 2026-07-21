@@ -4,18 +4,17 @@ import { useState } from "react";
 import Buttons from "../Buttons"
 import Input from "../Input";
 
-interface ServiceFormProps{
-    onAddService: (service: {name: string, cost: number, description: string}) => void
+interface ServiceFormProps {
+    onAddService: (service: { name: string, cost: number, description: string }) => void
 }
 
 const ServiceForm = ({ onAddService }: ServiceFormProps) => {
-
-    const [formData, setFormData] = useState({name: '', cost: '', description: ''})
+    const [formData, setFormData] = useState({ name: '', cost: '', description: '' })
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        if(!formData.name || !formData.cost || !formData.description){
+        if (!formData.name || !formData.cost || !formData.description) {
             alert('Preencha todos os campos')
             return
         }
@@ -35,7 +34,7 @@ const ServiceForm = ({ onAddService }: ServiceFormProps) => {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="pb-8">
+        <form onSubmit={handleSubmit} className="pb-6 space-y-4">
             <Input
                 type="text"
                 label="Nome do Serviço"
@@ -62,7 +61,7 @@ const ServiceForm = ({ onAddService }: ServiceFormProps) => {
                 value={formData.description}
                 onChange={handleChange}
             />
-            <Buttons title="Adicionar" />
+            <Buttons title="Adicionar Serviço" />
         </form>
     )
 }

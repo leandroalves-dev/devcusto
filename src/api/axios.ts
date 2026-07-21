@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const Api = axios.create({
-    baseURL: 'https:leandroeffgen.com.br/projects'
+    baseURL: 'http://localhost:3001'
 })
 
 export default Api;

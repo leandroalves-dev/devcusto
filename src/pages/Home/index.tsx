@@ -1,27 +1,24 @@
-//components
 import Container from "../../components/Container"
 import LinkButton from "../../components/LinkButton"
-
-//context
 import { useProject } from "../../context/useProject";
 
-
 const Home = () => {
-
     const { setSelectedProject } = useProject();
 
     return (
-        <Container>
-            
-            <div className="flex flex-col justify-center items-center mt-8 pb-3">
-                <h1 className="text-4xl text-white my-1">Bem-vindo ao <span className="border-b-2 border-b-neutral-800">Dev<span className="text-[#FF3C32]">Custo</span></span></h1>
-                <p className="text-zinc-800 mb-1">Comece a gerencia os seus projetos agora mesmo!</p>
+        <Container className="flex-1 flex flex-col">
+            <div className="flex flex-1 flex-col items-center justify-center text-center gap-6">
+                <h1 className="text-4xl md:text-5xl font-semibold text-text tracking-tight leading-tight">
+                    Bem-vindo ao <span className="text-primary">DevCusto</span>
+                </h1>
+                <p className="text-text-secondary text-base max-w-lg">
+                    Gerencie seus projetos de desenvolvimento com eficiência e controle de custos.
+                </p>
                 <LinkButton to="/new-projects" text="Criar Projeto" onClick={() => setSelectedProject(null)} />
-                <div className="w-76">
-                    <img src="/img-home.svg" alt="DevCusto" />
+                <div className="w-52 mt-2">
+                    <img src="/img-home.svg" alt="DevCusto" className="w-full" />
                 </div>
             </div>
-
         </Container>
     )
 }

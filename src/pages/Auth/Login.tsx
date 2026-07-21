@@ -12,8 +12,7 @@ import AlertMessage from "../../components/AlertMessage";
 import { useAuth } from "../../context/useAuth";
 
 const Login = () => {
-
-    const { login } = useAuth(); 
+    const { login } = useAuth();
 
     const [formData, setFormData] = useState({
         email: '',
@@ -23,34 +22,33 @@ const Login = () => {
     const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
 
-
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
             ...prevState, [name]: value
         }));
     };
-    
+
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-    
+
         if (!formData.email || !formData.password) {
             setError('Preencha todos os campos');
             setTimeout(() => setError(''), 2000);
             return;
         }
-    
+
         setLoading(true);
         setError('');
         setSuccess('');
-    
+
         try {
             await login(formData.email, formData.password);
-    
+
             setSuccess('Login efetuado com sucesso!');
             setTimeout(() => setSuccess(''), 2000);
             setFormData({ email: '', password: '' });
-    
+
         } catch (error) {
             setError(error instanceof Error ? error.message : 'Erro ao fazer login.');
             setTimeout(() => setError(''), 3000);
@@ -58,30 +56,38 @@ const Login = () => {
             setLoading(false);
         }
     };
-    
-    
-    
 
     return (
         <Container>
-            {loading && <Loading /> }
-            <div className="flex flex-col justify-center">
-                <form onSubmit={handleSubmit} className="mt-10 w-[100%] sm:w-[60%] mx-auto">
-                    <h2 className="text-2xl mb-5 text-white/90">Logar com os dados abaixo</h2>
-                    
-                    <Input label="E-mail" type="email" name="email" value={formData.email} placeholder="Digite seu e-mail..." onChange={handleInputChange} />
-                    <Input label="Senha" type="password" name="password" value={formData.password} placeholder="Digite sua senha..." onChange={handleInputChange} />
-                    
-                    <div className="flex justify-between items-center">
-                        <Buttons title="Logar" />
-                        <Link to="/reset" className="text-white underline hover:no-underline">Esqueceu a senha?</Link>
-                    </div>
-                
-                    <AlertMessage type="error" message={error} />
-                    <AlertMessage type="success" message={success} />           
-                </form>
-            </div>
+            {loading && <Loading />}
+            <div className="max-w-md mx-auto mt-16">
+                <h2 className="text-2xl font-semibold text-text mb-1">Entrar</h2>
+                <p className="text-text-muted text-sm mb-8">Acesse sua conta para gerenciar seus projetos.</p>
 
+                <div className="bg-surface border border-border rounded-lg p-6">
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <Input label="E-mail" type="email" name="email" value={formData.email} placeholder="Digite seu e-mail" onChange={handleInputChange} />
+                        <Input label="Senha" type="password" name="password" value={formData.password} placeholder="Digite sua senha" onChange={handleInputChange} />
+
+                        <div className="flex items-center justify-between pt-2">
+                            <Buttons title="Entrar" />
+                            <Link to="/reset" className="text-sm text-text-muted hover:text-primary transition-colors">
+                                Esqueceu a senha?
+                            </Link>
+                        </div>
+
+                        <AlertMessage type="error" message={error} />
+                        <AlertMessage type="success" message={success} />
+                    </form>
+                </div>
+
+                <p className="text-center text-text-muted text-sm mt-6">
+                    Não tem uma conta?{' '}
+                    <Link to="/register" className="text-primary hover:text-primary-hover transition-colors">
+                        Cadastre-se
+                    </Link>
+                </p>
+            </div>
         </Container>
     )
 }

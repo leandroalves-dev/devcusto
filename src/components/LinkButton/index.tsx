@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
-interface LinkButtonProps{
+
+interface LinkButtonProps {
     to: string
     text: string
     onClick?: () => void;
@@ -7,7 +8,13 @@ interface LinkButtonProps{
 
 const LinkButton = ({ to, text, onClick }: LinkButtonProps) => {
     return (
-        <Link to={to} className="bg-neutral-800 text-white p-2 rounded-[3px] my-3 cursor-pointer"  onClick={onClick}>{text}</Link>
+        <Link
+            to={to}
+            className="inline-flex items-center bg-surface hover:bg-surface-hover border border-border text-text text-sm font-medium px-5 py-2.5 rounded-md transition-colors"
+            onClick={onClick}
+        >
+            {text}
+        </Link>
     )
 }
 

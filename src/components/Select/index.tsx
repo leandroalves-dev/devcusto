@@ -10,18 +10,18 @@ interface SelectProps {
 
 const Select = ({ label, value, name, options, onChange }: SelectProps) => {
     return (
-        <div className="flex flex-col w-full">
-            <label className="text-white/90 text-[16px]">{label}:</label>
+        <div className="flex flex-col w-full gap-1.5">
+            <label htmlFor={name} className="text-text-secondary text-sm font-medium">{label}</label>
             <select
                 name={name}
                 id={name}
                 value={value}
                 onChange={onChange}
-                className="w-full border border-zinc-900 p-3 my-2 rounded-[3px] text-white/30 text-[12px] outline-none"
+                className="w-full bg-surface border border-border px-3.5 py-2.5 text-sm text-text rounded-md outline-none transition-colors focus:border-primary focus:ring-1 focus:ring-primary/30 appearance-none cursor-pointer"
             >
-                <option value="" className="text-zinc-800">Selecione uma opção</option>
+                <option value="" className="bg-surface text-text-muted">Selecione uma opção</option>
                 {options.map((option) => (
-                    <option key={option.id} value={option.id} className="text-zinc-800">
+                    <option key={option.id} value={option.id} className="bg-surface">
                         {option.name}
                     </option>
                 ))}

@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 //icons
 import { BsTrash } from "react-icons/bs";
 
-//serviços
+//services
 import { addService, deleteService, getProjectById } from "../../services/projectService";
 
 //interface
@@ -21,29 +21,25 @@ import ServiceForm from "../../components/ServiceForm";
 import { formatCurrency } from "../../utils";
 
 const ProjectEdit = () => {
-    const { id } = useParams(); 
+    const { id } = useParams();
     const navigate = useNavigate();
 
     const [project, setProject] = useState<AllProjects | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [showServiceForm, setShowServiceForm] = useState(false);
-    
 
     useEffect(() => {
-
         const fetchProject = async () => {
             try {
                 if (id) {
                     const projectData = await getProjectById(id);
-                    console.log("Projeto carregado:", projectData); 
                     setProject(projectData);
                 }
             } catch (error) {
                 if (error instanceof Error) {
                     setError(error.message);
-                    throw new Error('Erro ao carregar o projeto.');
-                }               
+                }
             } finally {
                 setLoading(false);
             }
@@ -51,23 +47,20 @@ const ProjectEdit = () => {
 
         fetchProject();
     }, [id]);
-   
+
     const handleAfterEdit = () => {
-        navigate("/projects"); 
+        navigate("/projects");
     };
 
     const toggleServiceForm = () => {
         setShowServiceForm(!showServiceForm)
     }
 
-    const handleAddService = async (service: {name: string, cost: number, description: string}) => {
-        if(!project) return;
+    const handleAddService = async (service: { name: string, cost: number, description: string }) => {
+        if (!project) return;
 
         const currentCost = project.services.reduce((total, s) => total + s.cost, 0);
         const newTotalCost = currentCost + service.cost;
-
-        console.log('currentCost', currentCost)
-        console.log('newTotalCost', newTotalCost)
 
         if (newTotalCost > project.budget) {
             Swal.fire({
@@ -80,103 +73,150 @@ const ProjectEdit = () => {
 
         try {
             const newService = await addService(project.id.toString(), service);
-    
+
             setProject((prevProject) =>
                 prevProject
                     ? {
-                          ...prevProject,
-                          services: [...prevProject.services, newService],
-                          cost: newTotalCost, 
-                      }
+                        ...prevProject,
+                        services: [...prevProject.services, newService],
+                        cost: newTotalCost,
+                    }
                     : prevProject
             );
-            setShowServiceForm(false); 
-            
+            setShowServiceForm(false);
+
         } catch (error) {
             console.error("Erro ao adicionar o serviço", error);
         }
     }
 
     const handleDeleteService = async (serviceId: string) => {
-
         if (!project) return;
-    
+
         try {
             await deleteService(project.id, serviceId);
-    
+
             setProject((prevProject) => {
                 if (!prevProject) return prevProject;
-             
+
                 const updatedServices = prevProject.services.filter((service) => service.id !== serviceId);
 
                 return {
                     ...prevProject,
-                    services: updatedServices, 
+                    services: updatedServices,
                     cost: updatedServices.reduce((total, s) => total + s.cost, 0),
                 };
             });
-    
+
         } catch (error) {
-            console.log("Erro ao deletar o serviço", error);
+            console.error("Erro ao deletar o serviço", error);
         }
     };
 
     if (loading) return <Loading />;
-    if (error) return <p>{error}</p>;
+    if (error) return <p className="text-error text-sm py-10 text-center">{error}</p>;
 
-    console.log('project', project)
+    const usedBudget = project?.services.reduce((total, s) => total + s.cost, 0) ?? 0;
+    const budget = project?.budget ?? 0;
+    const budgetPercentage = budget > 0 ? Math.min((usedBudget / budget) * 100, 100) : 0;
 
     return (
         <Container>
-
-            <div className="flex flex-col mt-7 border-b border-neutral-800 pb-10">
-                <h2 className="text-2xl text-white border-b border-neutral-800 pb-3 mb-3">Editar Projeto</h2>
-                <div className="flex flex-row max-sm:flex-col gap-10">
-                    <div className="w-full md:w-3/5">
-                        {project ? <ProjectForm project={project} onSuccess={handleAfterEdit} /> : <p>Projeto não encontrado</p>}
-                    </div>
-                    <div className="w-full md:w-2/5 flex flex-col gap-2 pt-4 p-4 bg-neutral-900">
-                        <p className="text-zinc-500"><span className="text-white">Nome: </span>{project?.name}</p>
-                        <p className="text-zinc-500"><span className="text-white">Descrição: </span>{project?.description}</p>
-                        <p className="text-zinc-500"><span className="text-white">Categoria: </span>{project?.category.name}</p>
-                        <p className="text-zinc-500"><span className="text-white">Total do Orçamento: </span>{formatCurrency(project?.budget ?? 0)}</p>
-                        <p className="text-zinc-500"><span className="text-white">Total utilizado: </span>{formatCurrency(project?.services.reduce((total, s) => total + s.cost, 0) ?? 0)}</p>
-                    </div>
+            <div className="mt-10 mb-16">
+                {/* Project info header */}
+                <div className="mb-8">
+                    <h2 className="text-2xl font-semibold text-text mb-1">Editar Projeto</h2>
+                    <p className="text-text-muted text-sm">Atualize os dados do projeto ou adicione serviços.</p>
                 </div>
-            </div>
 
-            <div className="border-b border-neutral-800 mt-3 mb-5">
-                <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-white text-2xl">Adicione um serviço</h2>
-                    <button onClick={toggleServiceForm} className="bg-neutral-800 text-white px-4 py-2 rounded-[3px] cursor-pointer">
-                        {showServiceForm ? "Fechar" : "Adicionar"}
-                    </button>
-                </div>
-                {showServiceForm && <ServiceForm onAddService={handleAddService} />}
-            </div>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+                    {/* Form */}
+                    <div className="lg:col-span-2">
+                        <div className="bg-surface border border-border rounded-lg p-6">
+                            {project ? <ProjectForm project={project} onSuccess={handleAfterEdit} /> : <p className="text-text-muted">Projeto não encontrado</p>}
+                        </div>
+                    </div>
 
-            <div className="flex flex-col mb-10">
-                <h2 className="text-white text-2xl pb-3 mb-3">Serviços</h2>
-                {project?.services.length === 0 && (
-                    <h2 className="text-zinc-500">No momento, não temos serviços cadastrados</h2>
-                )}
-                <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-white">
-                    {project?.services.map((service, index) => (
-                        <li key={index} className="bg-[#070707] border border-neutral-900 relative">
-                            <h2 className="text-center bg-[#171717] py-2.5">{service.name}</h2>
-                            <div className="p-4">
-                                <p>Custo Total: <span className="text-zinc-500">{formatCurrency(service.cost)}</span></p>
-                                <p className="text-zinc-500 text-sm mt-1.5">{service.description}</p>
-                            </div> 
-                            <div onClick={() => handleDeleteService(service.id)}>
-                                <BsTrash size={26} className="absolute right-1 bottom-1 p-1 cursor-pointer hover:text-[#FF3C32] transition delay-100" />
+                    {/* Project summary */}
+                    <div className="bg-surface border border-border rounded-lg p-6 h-fit">
+                        <h3 className="text-sm font-medium text-text mb-4">Resumo do Projeto</h3>
+                        <div className="space-y-3 text-sm">
+                            <div className="flex justify-between">
+                                <span className="text-text-muted">Nome</span>
+                                <span className="text-text">{project?.name}</span>
                             </div>
-                        </li>
-                    ))}
-                </ul>
-                
+                            <div className="flex justify-between">
+                                <span className="text-text-muted">Categoria</span>
+                                <span className="text-text">{project?.category.name}</span>
+                            </div>
+                            <div className="border-t border-border pt-3 mt-3">
+                                <div className="flex justify-between mb-2">
+                                    <span className="text-text-muted">Orçamento</span>
+                                    <span className="text-text font-medium">{formatCurrency(budget)}</span>
+                                </div>
+                                <div className="flex justify-between mb-3">
+                                    <span className="text-text-muted">Utilizado</span>
+                                    <span className={`font-medium ${budgetPercentage >= 90 ? 'text-error' : 'text-text'}`}>{formatCurrency(usedBudget)}</span>
+                                </div>
+                                <div className="w-full bg-border rounded-full h-1.5">
+                                    <div
+                                        className={`h-1.5 rounded-full transition-all ${budgetPercentage >= 90 ? 'bg-error' : 'bg-primary'}`}
+                                        style={{ width: `${budgetPercentage}%` }}
+                                    />
+                                </div>
+                                <p className="text-text-muted text-xs mt-1.5">{budgetPercentage.toFixed(0)}% utilizado</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Services section */}
+                <div className="border-t border-border pt-8">
+                    <div className="flex justify-between items-center mb-6">
+                        <div>
+                            <h2 className="text-xl font-semibold text-text">Serviços</h2>
+                            <p className="text-text-muted text-sm mt-1">{project?.services.length ?? 0} serviço{project?.services.length !== 1 ? 's' : ''}</p>
+                        </div>
+                        <button
+                            onClick={toggleServiceForm}
+                            className="text-sm font-medium px-4 py-2 rounded-md bg-surface border border-border text-text-secondary hover:text-text hover:bg-surface-hover transition-colors cursor-pointer"
+                        >
+                            {showServiceForm ? "Fechar" : "Adicionar Serviço"}
+                        </button>
+                    </div>
+
+                    {showServiceForm && (
+                        <div className="bg-surface border border-border rounded-lg p-6 mb-6">
+                            <ServiceForm onAddService={handleAddService} />
+                        </div>
+                    )}
+
+                    {project?.services.length === 0 && (
+                        <p className="text-text-muted text-sm py-8 text-center bg-surface border border-border rounded-lg">
+                            Nenhum serviço cadastrado ainda.
+                        </p>
+                    )}
+
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {project?.services.map((service) => (
+                            <li key={service.id} className="bg-surface border border-border rounded-lg p-5 relative group">
+                                <h3 className="text-sm font-medium text-text mb-2">{service.name}</h3>
+                                <p className="text-text-secondary text-sm mb-3">{service.description}</p>
+                                <p className="text-text-muted text-xs">
+                                    Custo: <span className="text-text font-medium">{formatCurrency(service.cost)}</span>
+                                </p>
+                                <button
+                                    onClick={() => handleDeleteService(service.id)}
+                                    className="absolute top-3 right-3 p-1.5 rounded-md text-text-muted hover:text-error hover:bg-error-subtle transition-colors opacity-0 group-hover:opacity-100 cursor-pointer"
+                                    aria-label="Excluir serviço"
+                                >
+                                    <BsTrash size={14} />
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
-         
         </Container>
     );
 };

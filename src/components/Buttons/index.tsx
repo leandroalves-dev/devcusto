@@ -1,10 +1,15 @@
-interface ButtonsProps{
-    title: string   
+interface ButtonsProps {
+    title: string
 }
 
 const Buttons = ({ title }: ButtonsProps) => {
     return (
-        <button className="bg-[#FF3C32] w-[25%] px-5 text-white p-2 rounded-[3px] cursor-pointer hover:opacity-80">{title}</button>
+        <button
+            type="submit"
+            className="bg-primary hover:bg-primary-hover text-white font-medium text-sm px-6 py-2.5 rounded-md cursor-pointer transition-colors mt-4"
+        >
+            {title}
+        </button>
     )
 }
 

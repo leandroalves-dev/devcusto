@@ -1,4 +1,5 @@
 import { FormEvent, useState } from "react"
+import { Link } from "react-router-dom"
 
 //services
 import { register } from "../../services/auth"
@@ -19,20 +20,20 @@ const Register = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
-    
-    const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
             ...prevState, [name]: value
         }))
     }
-    
+
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-        if(!formData.name || !formData.email || !formData.password){
+        if (!formData.name || !formData.email || !formData.password) {
             setError('Preencha todos os campos')
-            setTimeout(() => { setError('') },2000)
+            setTimeout(() => { setError('') }, 2000)
             return;
         }
 
@@ -42,41 +43,51 @@ const Register = () => {
             const user = await register(formData.email, formData.password, formData.name);
             setLoading(false);
             setSuccess("Cadastro realizado com sucesso!");
-            setTimeout(() => { setSuccess('') },2000)
+            setTimeout(() => { setSuccess('') }, 2000)
             setError('');
             setFormData({ name: '', email: '', password: '' });
-           
+
             console.log("Usuário registrado:", user);
 
         } catch (error: unknown) {
             if (error instanceof Error) {
                 setError(error.message)
                 throw new Error("Erro ao registrar. Tente novamente.");
-              }
-        } finally{
+            }
+        } finally {
             setLoading(false)
         }
     }
 
     return (
         <Container>
-            {loading && <Loading /> }
-            <div className="flex flex-col justify-center">
-                <form onSubmit={handleSubmit} className="mt-10 w-[100%] sm:w-[60%] mx-auto">
-                    <h2 className="text-2xl mb-5 text-white/90">Preencha o formulário de cadastro</h2>
-                    <Input label="Nome" type="text" name="name" value={formData.name} placeholder="Digite seu nome..." onChange={handleInputChange} />
-                    <div className="flex flex-col justify-between gap-1 sm:flex-row">
-                        <Input label="E-mail" type="email" name="email" value={formData.email} placeholder="Digite seu e-mail..." onChange={handleInputChange} />
-                        <Input label="Senha" type="password" name="password" value={formData.password} placeholder="Digite sua senha..." onChange={handleInputChange} />
-                    </div>
-                    
-                    <Buttons title="Cadastrar" />
-                
-                    <AlertMessage type="error" message={error} />
-                    <AlertMessage type="success" message={success} /> 
-                </form>
-            </div>
+            {loading && <Loading />}
+            <div className="max-w-md mx-auto mt-16">
+                <h2 className="text-2xl font-semibold text-text mb-1">Criar Conta</h2>
+                <p className="text-text-muted text-sm mb-8">Preencha os dados abaixo para se cadastrar.</p>
 
+                <div className="bg-surface border border-border rounded-lg p-6">
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <Input label="Nome" type="text" name="name" value={formData.name} placeholder="Digite seu nome" onChange={handleInputChange} />
+                        <Input label="E-mail" type="email" name="email" value={formData.email} placeholder="Digite seu e-mail" onChange={handleInputChange} />
+                        <Input label="Senha" type="password" name="password" value={formData.password} placeholder="Digite sua senha" onChange={handleInputChange} />
+
+                        <div className="pt-2">
+                            <Buttons title="Cadastrar" />
+                        </div>
+
+                        <AlertMessage type="error" message={error} />
+                        <AlertMessage type="success" message={success} />
+                    </form>
+                </div>
+
+                <p className="text-center text-text-muted text-sm mt-6">
+                    Já tem uma conta?{' '}
+                    <Link to="/login" className="text-primary hover:text-primary-hover transition-colors">
+                        Entrar
+                    </Link>
+                </p>
+            </div>
         </Container>
     )
 }

@@ -1,14 +1,11 @@
 import Api from './axios';
 
-export const getProject = async() => {
+export const getCategories = async () => {
     try {
-
-        const response = await Api.get('/devcusto/json/api.json')
-        //console.log('Retorna as categorias', response.data)
+        const response = await Api.get('/categories')
         return response.data
-        
     } catch (error) {
-        console.log('Erro ao buscar o projeto', error);
+        console.error('Erro ao buscar categorias', error);
         throw error;
     }
 }

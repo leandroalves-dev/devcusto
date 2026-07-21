@@ -26,11 +26,12 @@ import ProtectedRoute from './routes/ProtectedRoute'
 
 function App() {
     return (
-        <div className='bg-neutral-950 flex flex-col min-h-screen'>
+        <div className='bg-bg flex flex-col min-h-screen'>
             <AuthProvider>
                 <ProjectProvider>
                     <BrowserRouter>
                         <Header />
+                        <main className="flex-1 flex flex-col">
                             <Routes>
                                 <Route path='/' element={<Home />} />
                                 <Route path='/company' element={<Company />} />
@@ -41,7 +42,8 @@ function App() {
                                 <Route path='/projects' element={<ProtectedRoute><Projects /></ProtectedRoute>} />
                                 <Route path='/new-projects' element={<ProtectedRoute><NewProjects /></ProtectedRoute>} />
                                 <Route path='/projects/:id' element={<ProtectedRoute><ProjectEdit /></ProtectedRoute>} />
-                            </Routes>                       
+                            </Routes>
+                        </main>
                         <Footer />
                     </BrowserRouter>
                 </ProjectProvider>

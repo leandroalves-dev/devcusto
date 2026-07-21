@@ -1,21 +1,70 @@
 @import "tailwindcss";
 
-.btn-modal{
-    background: #FF3C32;
-    width: 100px;
+@theme {
+  --color-primary: #FF3C32;
+  --color-primary-hover: #e6352c;
+  --color-primary-subtle: #FF3C321a;
+
+  --color-bg: #09090b;
+  --color-surface: #18181b;
+  --color-surface-hover: #27272a;
+  --color-surface-elevated: #1e1e22;
+
+  --color-border: #27272a;
+  --color-border-subtle: #1e1e20;
+
+  --color-text: #fafafa;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #52525b;
+
+  --color-success: #22c55e;
+  --color-success-subtle: #22c55e1a;
+  --color-error: #ef4444;
+  --color-error-subtle: #ef44441a;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #27272a transparent;
+}
+
+::selection {
+  background-color: #FF3C3233;
+  color: #fafafa;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #18181b inset;
+  -webkit-text-fill-color: #fafafa;
+  caret-color: #fafafa;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* SweetAlert2 overrides */
+.btn-modal {
+  background: #FF3C32;
+  width: 100px;
 }
 
 div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm),
-div:where(.swal2-icon).swal2-success [class^=swal2-success-line]{
-    background-color: #FF3C32 !important;
+div:where(.swal2-icon).swal2-success [class^=swal2-success-line] {
+  background-color: #FF3C32 !important;
 }
 
-div:where(.swal2-icon).swal2-success .swal2-success-ring{
-    border: 1px solid #FF3C32 !important;
+div:where(.swal2-icon).swal2-success .swal2-success-ring {
+  border: 1px solid #FF3C32 !important;
 }
 
 div:where(.swal2-icon).swal2-warning,
-div:where(.swal2-icon).swal2-info{
-    color: #FF3C32 !important;
-    border-color: #FF3C32 !important;
+div:where(.swal2-icon).swal2-info {
+  color: #FF3C32 !important;
+  border-color: #FF3C32 !important;
 }
