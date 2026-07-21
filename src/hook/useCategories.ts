@@ -1,33 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 //interface
 import { Category } from "../interface/projects";
 
-//api
-import { getCategories } from "../api/projectsServices";
+const CATEGORIES: Category[] = [
+    { id: 1, name: "Desenvolvimento" },
+    { id: 2, name: "Design" },
+    { id: 3, name: "Infra" },
+    { id: 4, name: "Marketing" },
+];
 
 export const useCategories = () => {
-
-    const [categories, setCategories] = useState<Category[]>([])
-    const [loading, setLoading] = useState<boolean>(true)
-    const [error, setError] = useState<string | null>(null)
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
+        setCategories(CATEGORIES);
+        setLoading(false);
+    }, []);
 
-        const fetchCategories = async () => {
-            try {
-                const data = await getCategories()
-                setCategories(data)
-            } catch {
-                setError("Erro ao carregar as categorias");
-            } finally {
-                setLoading(false)
-            }
-        }
-
-        fetchCategories();
-
-    }, [])
-
-    return { categories, loading, error }
-}
+    return { categories, loading };
+};
