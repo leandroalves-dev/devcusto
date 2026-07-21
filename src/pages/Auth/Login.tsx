@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //components
 import Container from "../../components/Container"
@@ -13,6 +13,7 @@ import { useAuth } from "../../context/useAuth";
 
 const Login = () => {
     const { login } = useAuth();
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         email: '',
@@ -45,9 +46,7 @@ const Login = () => {
         try {
             await login(formData.email, formData.password);
 
-            setSuccess('Login efetuado com sucesso!');
-            setTimeout(() => setSuccess(''), 2000);
-            setFormData({ email: '', password: '' });
+            navigate('/projects');
 
         } catch (error) {
             setError(error instanceof Error ? error.message : 'Erro ao fazer login.');
